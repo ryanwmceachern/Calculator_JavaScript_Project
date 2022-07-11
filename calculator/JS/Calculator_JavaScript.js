@@ -1,7 +1,7 @@
 // creates an object to keep track of values
 const Calculator = {
     //this diplays 0 on the screen
-    Display_Value: "0",
+    Display_Value: '0',
     //this will hold the first operand for any expression, we set it to null for now
     First_Operand: null,
     //this checks weather or not the second operand has been input
@@ -12,7 +12,7 @@ const Calculator = {
 
     //this modifies values each time a button is clicked
     function Input_Digit(digit) {
-        const { Display_Value, Wait_Second_Operand } = Calculator;
+        const {Display_Value, Wait_Second_Operand } = Calculator;
         //we are checking to see if Wait_Second_Operand is ture and set
         //Display_Value to key that was clicked
         if (Wait_Second_Operand === true) {
@@ -21,7 +21,7 @@ const Calculator = {
         } else {
             //this overwirtes diplay value if the current value is 0
             //otherwise it adds onto it 
-            Calculator.Display_Value = Display_Value === '0' ? digit : Display_Value + digit;
+                Calculator.Display_Value = Display_Value === '0' ? digit : Display_Value + digit;
         }
     }
     //this section handles decimal points
@@ -38,7 +38,7 @@ const Calculator = {
 
 //this section handles operators
 function Handle_Operator(Next_Operator) {
-    const { First_Operand, Display_Value, operator } = Calculator
+    const {First_Operand, Display_Value, operator } = Calculator
     //when an operator key is pressed, we convert the current number
     //displayed on the screen to a number and then store the result in
     //Calculator.First_operand if it doesn't already exist
@@ -49,21 +49,20 @@ function Handle_Operator(Next_Operator) {
         Calculator.operator = Next_Operator;
         return;
     }
-    if (First_Operand === null) {
+    if (First_Operand == null) {
         Calculator.First_Operand = Value_of_Input;
     } else if (operator) {//checks if an operator alreadhy exists
         const Value_Now = First_Operand || 0;
         //if operator exists, property lookup is preformed for the operator
         //in the Perform_Calculation object and the function that ,acher the 
         //operator is executed
-        let result = Perform_Calculation[operator] (Value_Now, Value_of_Input);
+        let result = Perform_Calculation[operator](Value_Now, Value_of_Input);
         //here we add a fixed amount of numbers after the decimal
         result = Number(result).toFixed(9)
         //this will remove any trailing 0's
         result = (result * 1).toString()
         Calculator.Display_Value = parseFloat(result);
         Calculator.First_Operand = parseFloat(result);
-    
     }
     Calculator.Wait_Second_Operand = true;
     Calculator.operator = Next_Operator;    
@@ -71,13 +70,9 @@ function Handle_Operator(Next_Operator) {
 
     const Perform_Calculation = {
         '/': (First_Operand, Second_Operand) => First_Operand / Second_Operand,
-
         '*': (First_Operand, Second_Operand) => First_Operand * Second_Operand,
-
         '+': (First_Operand, Second_Operand) => First_Operand + Second_Operand,
-
         '-': (First_Operand, Second_Operand) => First_Operand - Second_Operand,
-
         '=': (First_Operand, Second_Operand) => Second_Operand
     };
 
@@ -89,7 +84,7 @@ function Handle_Operator(Next_Operator) {
     }
     //this function updates the screen with the contents of Display_value
     function Update_Display() {
-        const display = document.querySelector('.calculator-screen');
+        const display = document.querySelector('.calculator-screen'); 
         display.value = Calculator.Display_Value;
     }
 
@@ -97,7 +92,8 @@ function Handle_Operator(Next_Operator) {
     // this section monitors button clicks 
     const keys = document.querySelector('.calculator-keys');
     keys.addEventListener('click', (event) => {
-        //the target variable is an object that represents the elemnt that was clicked
+        //the target variable is an object that represents the elemnt 
+        //that was clicked
         const { target } = event;
         //if the element that was clicked on is not a button, exit the function
         if (!target.matches('button')) {
